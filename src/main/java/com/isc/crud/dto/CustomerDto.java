@@ -15,7 +15,6 @@ public class CustomerDto extends BaseDto {
     private String name;
     private String family;
     private String nationalIdentifier;
-    private String certificateSerial;
     private Integer birthDate;
     private BigDecimal postalCode;
     private String address;
