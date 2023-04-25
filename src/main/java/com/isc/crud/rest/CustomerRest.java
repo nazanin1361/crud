@@ -24,7 +24,7 @@ public class CustomerRest {
     }
 
     @GetMapping("/find-by-id/{customerId}")
-    public ResponseEntity<CustomerDto> findById(@PathVariable(value = "customerId") Long customerId) {
+    public ResponseEntity<CustomerDto> getCustomerByCustomerId(@PathVariable(value = "customerId") Long customerId) {
         return ResponseEntity.ok().body(customerService.findById(customerId));
     }
 

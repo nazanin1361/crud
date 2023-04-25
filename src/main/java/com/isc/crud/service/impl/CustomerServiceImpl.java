@@ -2,12 +2,14 @@ package com.isc.crud.service.impl;
 
 import com.isc.crud.dto.CustomerDto;
 import com.isc.crud.entity.Customer;
+import com.isc.crud.exception.NotFoundException;
 import com.isc.crud.mapper.BaseMapper;
 import com.isc.crud.mapper.CustomerMapper;
 import com.isc.crud.repository.CustomerRepository;
 import com.isc.crud.service.CustomerService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class CustomerServiceImpl extends BaseServiceImpl<Customer, CustomerDto>
         implements CustomerService {
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     private final CustomerMapper mapper;
     private final CustomerRepository repository;
@@ -28,9 +31,24 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer, CustomerDto>
 
     @Override
     public CustomerDto editCustomer(CustomerDto customerDto) {
+        Customer existingCustomer = getCrudRepository().findById(customerDto.getId())
+                .orElseThrow(() -> {
+                    logger.error("Customer with Id {} not found", customerDto.getId());
+                    throw new NotFoundException(String.format("Customer with Id {} not found", customerDto.getId()));
+                });
 
-        return null;
+        existingCustomer.setName(customerDto.getName());
+        existingCustomer.setFamily(customerDto.getFamily());
+        existingCustomer.setNationalIdentifier(customerDto.getNationalIdentifier());
+        existingCustomer.setBirthDate(customerDto.getBirthDate());
+        existingCustomer.setPostalCode(customerDto.getPostalCode());
+        existingCustomer.setAddress(customerDto.getAddress());
+        existingCustomer.setMobileNumber(customerDto.getMobileNumber());
+        existingCustomer.setPersonalEmail(customerDto.getPersonalEmail());
+
+        return getMapper().toDto(getCrudRepository().save(existingCustomer));
     }
+
     @Transactional
     @Override
     public Long deleteCustomer(CustomerDto customerDto) {

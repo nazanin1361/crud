@@ -5,9 +5,8 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 import java.math.BigDecimal;
@@ -15,8 +14,7 @@ import java.math.BigDecimal;
 @Entity
 @Table(name = CustomerConstant.TABLE_NAME)
 
-@Getter
-@Setter
+@Data
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -42,7 +40,7 @@ public class Customer extends BaseEntity {
     @Column(length = 1)
     private Integer gender;
 
-    @Column(name = CustomerConstant.MOBILE_NUMBER, length = 11, nullable = false)
+    @Column(name = CustomerConstant.MOBILE_NUMBER, length = 12, nullable = false)
     private String mobileNumber;
 
     @Column(length = 100)
