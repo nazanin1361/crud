@@ -12,7 +12,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/crud/customer")
+@RequestMapping("/api/crud/customer")
 public class CustomerRest {
 
     @Autowired
