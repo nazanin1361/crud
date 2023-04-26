@@ -34,7 +34,7 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer, CustomerDto>
         Customer existingCustomer = getCrudRepository().findById(customerDto.getId())
                 .orElseThrow(() -> {
                     logger.error("Customer with Id {} not found", customerDto.getId());
-                    throw new NotFoundException(String.format("Customer with Id {} not found", customerDto.getId()));
+                    throw new NotFoundException("Customer not found");
                 });
 
         existingCustomer.setName(customerDto.getName());
@@ -55,11 +55,6 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer, CustomerDto>
 
         getCrudRepository().delete(mapper.toEntity(customerDto));
         return customerDto.getId();
-    }
-
-    @Override
-    public CustomerDto getCustomer(Long id) {
-        return mapper.toDto(getCrudRepository().findById(id).orElse(null));
     }
 
     @Override
