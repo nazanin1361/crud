@@ -52,7 +52,6 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer, CustomerDto>
     @Transactional
     @Override
     public Long deleteCustomer(CustomerDto customerDto) {
-
         getCrudRepository().delete(mapper.toEntity(customerDto));
         return customerDto.getId();
     }

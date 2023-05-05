@@ -4,7 +4,6 @@ package com.isc.crud.rest;
 import com.isc.crud.dto.CustomerDto;
 import com.isc.crud.service.CustomerService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,8 +14,7 @@ import java.util.List;
 @RequestMapping("/api/crud/customer")
 public class CustomerRest {
 
-    @Autowired
-    private CustomerService customerService;
+    private final CustomerService customerService;
 
     @GetMapping("/get-all-customer")
     public ResponseEntity<List<CustomerDto>> getAllCustomers() {
