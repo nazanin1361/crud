@@ -3,7 +3,7 @@ package com.isc.crud.service;
 import com.isc.crud.dto.BaseDto;
 import com.isc.crud.entity.BaseEntity;
 import com.isc.crud.mapper.BaseMapper;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
@@ -35,7 +35,7 @@ public interface BaseService<E extends BaseEntity, D extends BaseDto> {
 
     BaseMapper<E, D> getMapper();
 
-    default CrudRepository<E, Long> getCrudRepository() {
+    default JpaRepository<E, Long> getRepository() {
         throw new IllegalArgumentException("CRUD repository is not implemented!");
     }
 

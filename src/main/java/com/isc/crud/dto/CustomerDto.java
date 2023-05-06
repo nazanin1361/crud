@@ -8,7 +8,6 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 @SuperBuilder
-@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 public class CustomerDto extends BaseDto {

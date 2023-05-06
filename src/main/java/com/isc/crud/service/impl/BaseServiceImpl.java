@@ -14,13 +14,13 @@ public abstract class BaseServiceImpl<E extends BaseEntity, D extends BaseDto> i
     @Override
     public D save(D dto) {
         E entity = getMapper().toEntity(dto);
-        entity = getCrudRepository().save(entity);
+        entity = getRepository().save(entity);
         return getMapper().toDto(entity);
     }
 
     @Override
     public D update(D dto) {
-        D dbData = findById(dto.getId());
+        findById(dto.getId());
         /*if (!dto.getVersion().equals(dbData.getVersion()))
             throw new InternalBusinessException("not same version exception");*/
         return save(dto);
@@ -30,7 +30,7 @@ public abstract class BaseServiceImpl<E extends BaseEntity, D extends BaseDto> i
     public List<D> saveAll(List<D> dtoList) {
         return dtoList.
                 stream().
-                map(d -> getCrudRepository().save(getMapper().toEntity(d))).
+                map(d -> getRepository().save(getMapper().toEntity(d))).
                 map(e -> getMapper().toDto(e)).
                 collect(Collectors.toList());
     }
@@ -38,7 +38,7 @@ public abstract class BaseServiceImpl<E extends BaseEntity, D extends BaseDto> i
     @Override
     public D findById(Long id) {
         //E entity = getCrudRepository().findById(id).orElseThrow(() -> new InternalBusinessException("not found exception"));
-        E entity = getCrudRepository().findById(id).orElse(null);
+        E entity = getRepository().findById(id).orElse(null);
         return getMapper().toDto(entity);
     }
 
@@ -50,7 +50,7 @@ public abstract class BaseServiceImpl<E extends BaseEntity, D extends BaseDto> i
     @Override
     public List<D> findAll() {
         List<D> list = new ArrayList<>();
-        getCrudRepository().findAll().iterator().forEachRemaining(e -> list.add(getMapper().toDto(e)));
+        getRepository().findAll().iterator().forEachRemaining(e -> list.add(getMapper().toDto(e)));
         return list;
     }
 
