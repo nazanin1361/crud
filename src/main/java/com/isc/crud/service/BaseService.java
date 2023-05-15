@@ -4,6 +4,7 @@ import com.isc.crud.dto.BaseDto;
 import com.isc.crud.entity.BaseEntity;
 import com.isc.crud.mapper.BaseMapper;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
@@ -17,25 +18,15 @@ public interface BaseService<E extends BaseEntity, D extends BaseDto> {
 
     D findById(Long var1);
 
-    boolean existsById(Long var1);
-
     List<D> findAll();
-
-    List<D> findAllById(List<Long> var1);
-
-    long count();
-
-    void deleteById(Long var1);
-
-    void delete(D var1);
-
-    void deleteAll(List<? extends D> var1);
-
-    void deleteAll();
 
     BaseMapper<E, D> getMapper();
 
-    default JpaRepository<E, Long> getRepository() {
+    default CrudRepository<E, Long> getRepository() {
+        return getJpaRepository();
+    }
+
+    default <P extends JpaRepository<E, Long>> P getJpaRepository() {
         throw new IllegalArgumentException("CRUD repository is not implemented!");
     }
 
