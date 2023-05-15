@@ -1,0 +1,3 @@
+INSERT INTO customers (name, family, nationalIdentifier, birthDate, postalCode, address, gender, mobileNumber, personalEmail) VALUES ('Sara', 'Ahmadi', '0039876543', 13610606, 1245698745, 'addr1', 1, '091223456789', 'sara@gmail.com');
+INSERT INTO customers (name, family, nationalIdentifier, birthDate, postalCode, address, gender, mobileNumber, personalEmail) VALUES ('Tara', 'Akbari', '0039876543', 13680405, 1245698987, 'addr2', 1, '091223637864', 'tara@gmail.com');
+INSERT INTO customers (name, family, nationalIdentifier, birthDate, postalCode, address, gender, mobileNumber, personalEmail) VALUES ('Zahra', 'Emadi', '0039879943', 13695405, 1233698987, 'addr3', 1, '091223637865', 'zahra@gmail.com');
