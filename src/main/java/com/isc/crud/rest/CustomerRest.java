@@ -10,34 +10,34 @@ import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api/crud/customer")
+@RequestMapping("/customer")
 public class CustomerRest {
 
     private final CustomerService customerService;
 
-    @GetMapping("/get-all-customer")
+    @GetMapping("/all")
     public ResponseEntity<CustomerResponseDto> getAllCustomers(@RequestParam(value = "pageNo", defaultValue = "0", required = false) int pageNo,
                                                                          @RequestParam(value = "pageSize", defaultValue = "10", required = false) int pageSize
     ) {
         return ResponseEntity.ok(customerService.getAllCustomers(pageNo, pageSize));
     }
 
-    @GetMapping("/find-by-id/{customerId}")
+    @GetMapping("/{customerId}")
     public ResponseEntity<CustomerDto> getCustomerByCustomerId(@PathVariable(value = "customerId") Long customerId) {
         return ResponseEntity.ok().body(customerService.getCustomerByCustomerId(customerId));
     }
 
-    @PostMapping("/add-customer")
+    @PostMapping
     public ResponseEntity<CustomerDto> createCustomer(@RequestBody CustomerDto customerDto) {
         return ResponseEntity.ok().body(customerService.createCustomer(customerDto));
     }
 
-    @PostMapping("/delete-customer")
-    public ResponseEntity<Long> deleteCustomer(@RequestBody CustomerDto customerDto) {
-        return ResponseEntity.ok().body(customerService.deleteCustomer(customerDto));
+    @DeleteMapping("/{customerId}")
+    public ResponseEntity<Long> deleteCustomer(@PathVariable(value = "customerId") Long customerId) {
+        return ResponseEntity.ok().body(customerService.deleteCustomer(customerId));
     }
 
-    @PostMapping("/update-customer")
+    @PutMapping
     public ResponseEntity<CustomerDto> updateCustomer(@RequestBody CustomerDto customerDto) {
         return ResponseEntity.ok().body(customerService.editCustomer(customerDto));
     }

@@ -31,7 +31,7 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer, CustomerDto>
     @Transactional
     @Override
     public CustomerDto createCustomer(CustomerDto customerDto) {
-        return mapper.toDto(repository.save(mapper.toEntity(customerDto)));
+        return save(customerDto);
     }
 
     @Override
@@ -60,10 +60,10 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer, CustomerDto>
 
     @Transactional
     @Override
-    public Long deleteCustomer(CustomerDto customerDto) {
-        Customer existingCustomer = getCustomer(customerDto.getId());
+    public Long deleteCustomer(Long customerId) {
+        Customer existingCustomer = getCustomer(customerId);
         getRepository().delete(existingCustomer);
-        return customerDto.getId();
+        return customerId;
     }
 
     @Override

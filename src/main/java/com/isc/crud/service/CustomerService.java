@@ -8,7 +8,7 @@ public interface CustomerService extends BaseService<Customer, CustomerDto>{
 
     CustomerDto createCustomer(CustomerDto customerDto);
     CustomerDto editCustomer(CustomerDto customerDto);
-    Long deleteCustomer(CustomerDto customerDto);
+    Long deleteCustomer(Long customerId);
     CustomerDto getCustomerByCustomerId(Long customerId);
     CustomerResponseDto getAllCustomers(int pageNo, int pageSize);
 }

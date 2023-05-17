@@ -16,10 +16,6 @@ spring:
       platform: h2
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
-    properties:
-      hibernate:
-        globally_quoted_identifiers: true
-    defer-datasource-initialization: true
     hibernate:
       ddl-auto: create
     show-sql: true
